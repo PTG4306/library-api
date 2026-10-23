@@ -1,0 +1,535 @@
+{
+  "info": {
+    "_postman_id": "0caecafe-3a6b-421a-9c27-e151edfe0eeb",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59089042",
+    "_collection_link": "https://go.postman.co/collection/59089042-0caecafe-3a6b-421a-9c27-e151edfe0eeb?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "TC01 - Health Check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC01 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC01 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "pm.test(\"TC01 - Response has valid JSON body\", function () {",
+              "    pm.response.to.be.json;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC02 - Get All Books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC02 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC02 - Response is an array\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "});",
+              "",
+              "pm.test(\"TC02 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "pm.test(\"TC02 - Each book has required fields\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    if (jsonData.length > 0) {",
+              "        jsonData.forEach(function(book) {",
+              "            pm.expect(book).to.have.property(\"id\");",
+              "            pm.expect(book).to.have.property(\"title\");",
+              "            pm.expect(book).to.have.property(\"author\");",
+              "            pm.expect(book).to.have.property(\"isbn\");",
+              "        });",
+              "    }",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC03 - Search Books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC03 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC03 - Response is an array\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "});",
+              "",
+              "pm.test(\"TC03 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "pm.test(\"TC03 - Search results contain relevant books\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC04 - Get Book By ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC04 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC04 - Response has required book fields\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"id\");",
+              "    pm.expect(jsonData).to.have.property(\"title\");",
+              "    pm.expect(jsonData).to.have.property(\"author\");",
+              "    pm.expect(jsonData).to.have.property(\"isbn\");",
+              "    pm.expect(jsonData).to.have.property(\"year\");",
+              "    pm.expect(jsonData).to.have.property(\"quantity\");",
+              "});",
+              "",
+              "pm.test(\"TC04 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "pm.test(\"TC04 - Book ID matches requested ID\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.id).to.eql(1);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC05 - Book Not Found",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC05 - Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"TC05 - Response has error message\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"detail\");",
+              "});",
+              "",
+              "pm.test(\"TC05 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC06 - Create Book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC06 - Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"TC06 - Response has created book data\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"id\");",
+              "    pm.expect(jsonData).to.have.property(\"isbn\");",
+              "    pm.expect(jsonData).to.have.property(\"title\");",
+              "    pm.expect(jsonData).to.have.property(\"author\");",
+              "    pm.expect(jsonData).to.have.property(\"year\");",
+              "    pm.expect(jsonData).to.have.property(\"quantity\");",
+              "});",
+              "",
+              "pm.test(\"TC06 - Created book has correct data\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.isbn).to.eql(\"9786040000042\");",
+              "    pm.expect(jsonData.title).to.eql(\"Phát triển Web API với FastAPI\");",
+              "    pm.expect(jsonData.author).to.eql(\"Lê Minh Tuấn\");",
+              "    pm.expect(jsonData.year).to.eql(2024);",
+              "    pm.expect(jsonData.quantity).to.eql(4);",
+              "});",
+              "",
+              "pm.test(\"TC06 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "// Save the created book ID for later use",
+              "if (pm.response.code === 201) {",
+              "    const jsonData = pm.response.json();",
+              "    pm.collectionVariables.set(\"createdBookId\", jsonData.id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"isbn\": \"9786040000042\",\r\n    \"title\": \"Phát triển Web API với FastAPI\",\r\n    \"author\": \"Lê Minh Tuấn\",\r\n    \"year\": 2024,\r\n    \"quantity\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC07 - Duplicate ISBN",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC07 - Status code is 409 (Conflict)\", function () {",
+              "    pm.response.to.have.status(409);",
+              "});",
+              "",
+              "pm.test(\"TC07 - Response has error detail\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"detail\");",
+              "});",
+              "",
+              "pm.test(\"TC07 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"isbn\": \"9786040000042\",\r\n    \"title\": \"Phát triển Web API với FastAPI\",\r\n    \"author\": \"Lê Minh Tuấn\",\r\n    \"year\": 2024,\r\n    \"quantity\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC08 - Invalid Book Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC08 - Status code is 422 (Unprocessable Entity)\", function () {",
+              "    pm.response.to.have.status(422);",
+              "});",
+              "",
+              "pm.test(\"TC08 - Response has validation error details\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"detail\");",
+              "});",
+              "",
+              "pm.test(\"TC08 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"isbn\": \"123\",\r\n    \"title\": \"Sach kiem thu\",\r\n    \"author\": \"Nguyen Van A\",\r\n    \"year\": 1800,\r\n    \"quantity\": 5\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC09 - Update Book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC09 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC09 - Response has updated book data\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"id\");",
+              "    pm.expect(jsonData).to.have.property(\"title\");",
+              "    pm.expect(jsonData).to.have.property(\"author\");",
+              "    pm.expect(jsonData).to.have.property(\"year\");",
+              "    pm.expect(jsonData).to.have.property(\"quantity\");",
+              "});",
+              "",
+              "pm.test(\"TC09 - Book data was updated correctly\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.title).to.eql(\"Lập trình FastAPI nâng cao\");",
+              "    pm.expect(jsonData.year).to.eql(2025);",
+              "    pm.expect(jsonData.quantity).to.eql(8);",
+              "});",
+              "",
+              "pm.test(\"TC09 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"isbn\": \"9786040000042\",\r\n    \"title\": \"Lập trình FastAPI nâng cao\",\r\n    \"author\": \"Lê Minh Tuấn\",\r\n    \"year\": 2025,\r\n    \"quantity\": 8\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC10 - Patch Book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC10 - Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TC10 - Response has book data\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"id\");",
+              "    pm.expect(jsonData).to.have.property(\"quantity\");",
+              "});",
+              "",
+              "pm.test(\"TC10 - Quantity was patched correctly\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.quantity).to.eql(10);",
+              "});",
+              "",
+              "pm.test(\"TC10 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"quantity\": 10\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC11 - Delete Book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"TC11 - Status code is 200 or 204\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
+              "});",
+              "",
+              "pm.test(\"TC11 - Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC12 - Verify Deleted Book",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
