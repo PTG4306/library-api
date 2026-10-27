@@ -51,7 +51,7 @@ Swagger UI:
 
 Postman Collection Runner:
 
-![Postman Runner](docs/postman_runner.png)
+![Postman Runner](docs/Postman.png)
 
 ## 6. GitHub và nộp bài
 
